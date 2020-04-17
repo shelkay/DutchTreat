@@ -1,5 +1,7 @@
 ﻿
-body {
+
+
+/*body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -69,7 +71,17 @@ ul.product-props li {
    width:auto;        
 }
 
+menu li {
+    display: inline;
+}
 
+menu li::after {
+    content: ' |';
+}
+
+menu li:last-of-type::after {
+    content: "";
+}*/
 
 
 
