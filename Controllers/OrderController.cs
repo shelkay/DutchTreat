@@ -35,7 +35,7 @@ namespace DutchTreat.Controllers
         /// <returns>should items be incl with order</returns>
         public IActionResult Get(bool includeItems = true) {
             try {
-                var results = repository.GetAllOrders();
+                var results = repository.GetAllOrders(includeItems);
 
 
                 return Ok(mapper.Map<IEnumerable<Order>, 

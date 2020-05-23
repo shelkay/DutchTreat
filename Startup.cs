@@ -5,10 +5,12 @@ using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
 using DutchTreat.Data;
+using DutchTreat.Data.Entities;
 using DutchTreat.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,12 +25,18 @@ namespace DutchTreat
         public Startup(IConfiguration config) {
             _config = config;
         }
-        public void ConfigureServices(IServiceCollection services)
-        {
+        public void ConfigureServices(IServiceCollection services) {
+            // TODO:  Can derive role class to have our own custom roles
+            services.AddIdentity<StoreUser, IdentityRole>(cfg => {
+                cfg.User.RequireUniqueEmail = true;             
+            }).AddEntityFrameworkStores<DutchContext>();
 
             services.AddDbContext<DutchContext>(cfg => {
                 cfg.UseSqlServer(_config.GetConnectionString("DutchConnectionString"));
             });
+
+
+
             services.AddTransient<IMailService, NullMailService>();
             services.AddTransient<DutchSeeder>();
 
@@ -43,7 +51,7 @@ namespace DutchTreat
             //services.AddRazorPages();
             //MvcOptions.EnableEndpointRouting = false;
             services.AddMvc(options => options.EnableEndpointRouting = false);
-                //SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            //SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             //services.AddMvc();
         }
         // Middleware
