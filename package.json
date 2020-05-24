@@ -9,6 +9,7 @@
   "dependencies": {
     "popper.js": "^1.16.1",
     "jquery-validation": "^1.19.1",
-    "jquery-validation-unobtrusive": "3.2.11"
+    "jquery-validation-unobtrusive": "3.2.11",
+    "font-awesome": "4.7.0"
   }
 }
